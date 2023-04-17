@@ -1,0 +1,11 @@
+.btn.btn-outline-success{
+ margin-right: 10px;
+ border-color: orange;
+ color: orange;
+}
+
+.btn.btn-outline-success:hover{
+    margin-right: 10px;
+    color: white;
+    background-color: orange;
+}
