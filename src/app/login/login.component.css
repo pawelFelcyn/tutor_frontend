@@ -13,3 +13,8 @@ form{
 .btn.btn-primary.btn-block.mb-4:hover{
     background-color: #E68A00;
 }
+
+.errors-div{
+    color: red;
+    font-size: 12px;
+}

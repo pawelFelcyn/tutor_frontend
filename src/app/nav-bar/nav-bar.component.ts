@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoginDto } from 'src/dtos/login.dto';
 
 @Component({
   selector: 'app-nav-bar',
