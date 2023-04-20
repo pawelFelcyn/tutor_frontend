@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { LoginDto } from 'src/dtos/login.dto';
 import { APIService } from './api.service';
 import { APIResponse } from 'src/models/api.response';
@@ -10,6 +10,8 @@ import { AppCookieService } from './app-cookie.service';
   providedIn: 'root'
 })
 export class LoginService extends APIService{
+
+  statusChangedEventEmmiter: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(httpClient: HttpClient,
     private readonly cookieServise: AppCookieService)
@@ -22,8 +24,14 @@ export class LoginService extends APIService{
 
     if (response.success){
       this.cookieServise.set("token", (response.contentDeserialized as LoginResponseDto).token)
+      this.statusChangedEventEmmiter.emit(true);
     }
 
     return response;
+  }
+
+  public signOut(): void{
+    this.cookieServise.remove("token");
+    this.statusChangedEventEmmiter.emit(false);
   }
 }

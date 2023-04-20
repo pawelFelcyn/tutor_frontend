@@ -12,7 +12,7 @@
         </ul>
           <button class="btn btn-outline-success" type="submit" *ngIf="!isUserSignedIn">Sign up</button>
           <button (click)="navigateTo('/signin')" class="btn btn-outline-success" type="submit" *ngIf="!isUserSignedIn">Sign in</button>
-          <button class="btn btn-outline-success" type="submit" *ngIf="isUserSignedIn">Sign out</button>
+          <button (click)="signOut()" class="btn btn-outline-success" type="submit" *ngIf="isUserSignedIn">Sign out</button>
       </div>
     </div>
   </nav>
