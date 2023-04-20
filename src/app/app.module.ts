@@ -7,15 +7,16 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { LoginComponent } from './login/login.component';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule } from '@angular/common/http';
+import { AvdertisementsComponent } from './avdertisements/avdertisements.component'
 
 const appRoutes: Routes = [
   { path: 'signin', component: LoginComponent },
-
+  { path: 'advertisements', component: AvdertisementsComponent },
 ];
 
 @NgModule({
-  declarations: [AppComponent, NavBarComponent, LoginComponent],
+  declarations: [AppComponent, NavBarComponent, LoginComponent, AvdertisementsComponent],
   imports: [
     BrowserModule, 
     AppRoutingModule, 

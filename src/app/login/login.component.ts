@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
     var response = await this._service.login(this.loginDto);
 
     if(response.success){
-      // this._router.navigate(["/home"]);
+      this._router.navigate(["/advertisements"]);
       return;
     }
 
