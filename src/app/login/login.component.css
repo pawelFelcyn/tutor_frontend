@@ -1,0 +1,20 @@
+form{
+    max-width: 300px; 
+    margin: 0 auto; 
+    margin-top: 200px;
+}
+
+.btn.btn-primary.btn-block.mb-4{
+    background-color: orange;
+    border-color: orange;
+    width: 100%;
+}
+
+.btn.btn-primary.btn-block.mb-4:hover{
+    background-color: #E68A00;
+}
+
+.errors-div{
+    color: red;
+    font-size: 12px;
+}

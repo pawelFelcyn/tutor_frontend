@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { LoginDto } from 'src/dtos/login.dto';
+import { AppCookieService } from '../services/app-cookie.service';
+import { LoginService } from '../services/login.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -7,9 +11,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavBarComponent implements OnInit {
 
-  constructor() { }
+  isUserSignedIn: boolean = false;
 
-  ngOnInit(): void {
+  constructor(private readonly router: Router,
+    private readonly _cookieService: AppCookieService,
+    private readonly _loginService: LoginService) { 
+      this.listenLoginStatusChanges();
+    }
+
+  private listenLoginStatusChanges(): void{
+    this._loginService.statusChangedEventEmmiter.subscribe(status =>{
+      this.isUserSignedIn = status;
+    });
   }
 
+  ngOnInit(): void {
+    this.isUserSignedIn = this._cookieService.get("token") != null;
+  }
+  
+
+  public navigateTo(path: string): void{
+    this.router.navigate([path]);
+  }
+
+  public signOut(): void{
+    this._loginService.signOut();
+  }
 }
