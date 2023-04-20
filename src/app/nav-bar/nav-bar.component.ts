@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginDto } from 'src/dtos/login.dto';
+import { AppCookieService } from '../services/app-cookie.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -9,9 +10,13 @@ import { LoginDto } from 'src/dtos/login.dto';
 })
 export class NavBarComponent implements OnInit {
 
-  constructor(private readonly router: Router) { }
+  isUserSignedIn: boolean = false;
+
+  constructor(private readonly router: Router,
+    private readonly _cookieService: AppCookieService) { }
 
   ngOnInit(): void {
+    this.isUserSignedIn = this._cookieService.get("token") != null;
   }
   
 
