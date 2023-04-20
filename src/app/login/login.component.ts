@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginDto } from 'src/dtos/login.dto';
+import { LoginService } from '../services/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -12,15 +14,26 @@ export class LoginComponent implements OnInit {
   emailErrors: string = '';
 
 
-  constructor() { }
+  constructor(private readonly _service: LoginService,
+    private readonly _router: Router) { }
 
   ngOnInit(): void {
   }
   
-  public signIn(): void{
+  public async signIn(): Promise<void>{
     if (!this.validateDto()){
       return;
     }
+
+    var response = await this._service.login(this.loginDto);
+
+    if(response.success){
+      // this._router.navigate(["/home"]);
+      return;
+    }
+
+    this.passwordErrors = "Invalid email or password";
+    this.emailErrors = "Invalid email or password";
   }
 
   private validateDto() : boolean{

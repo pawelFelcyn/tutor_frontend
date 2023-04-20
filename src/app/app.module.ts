@@ -7,6 +7,7 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { LoginComponent } from './login/login.component';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http'
 
 const appRoutes: Routes = [
   { path: 'signin', component: LoginComponent },
@@ -19,7 +20,8 @@ const appRoutes: Routes = [
     BrowserModule, 
     AppRoutingModule, 
     RouterModule.forRoot(appRoutes),
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   exports: [RouterModule],
   providers: [],
