@@ -10,7 +10,7 @@
             <!-- <a class="nav-link active" aria-current="page" href="#">Home</a> -->
           </li>
         </ul>
-          <button class="btn btn-outline-success" type="submit" *ngIf="!isUserSignedIn">Sign up</button>
+          <button (click)="navigateTo('/register')" class="btn btn-outline-success" type="submit" *ngIf="!isUserSignedIn">Sign up</button>
           <button (click)="navigateTo('/signin')" class="btn btn-outline-success" type="submit" *ngIf="!isUserSignedIn">Sign in</button>
           <button (click)="signOut()" class="btn btn-outline-success" type="submit" *ngIf="isUserSignedIn">Sign out</button>
       </div>
