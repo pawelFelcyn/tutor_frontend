@@ -6,7 +6,9 @@
       <input
         type="text"
         id="firstNameInput"
+        name="firstNameInput"
         class="form-control"
+        [(ngModel)]="registerDto.firstName"
       />
       <label class="form-label" for="firstNameInput">First name</label>
     </div>
@@ -15,7 +17,9 @@
         <input
           type="text"
           id="lastNameInput"
+          name="lastNameInput"
           class="form-control"
+          [(ngModel)]="registerDto.lastName"
         />
         <label class="form-label" for="lastNameInput">Last name</label>
       </div>
@@ -24,7 +28,9 @@
       <input
         type="email"
         id="emailInput"
+        name="emailInput"
         class="form-control"
+        [(ngModel)]="registerDto.email"
       />
       <label class="form-label" for="emailInput">Email</label>
     </div>
@@ -33,7 +39,9 @@
         <select
           type="checkbox"
           id="roleInput"
-          class="form-control select">
+          name="roleInput"
+          class="form-control select"
+          [(ngModel)]="registerDto.role">
           <option value="User">User</option>
           <option value="Tutor">Tutor</option>
         </select>
@@ -44,7 +52,9 @@
         <textarea
           rows="10"
           id="descriptionInput"
-          class="form-control"></textarea>
+          name="descriptionInput"
+          class="form-control"
+          [(ngModel)]="registerDto.tutorDescription"></textarea>
         <label class="form-label" for="descriptionInput">Tutor description</label>
       </div>
 
@@ -52,7 +62,9 @@
       <input
         type="password"
         id="passwordInput"
+        name="passwordInput"
         class="form-control"
+        [(ngModel)]="registerDto.password"
       />
       <label class="form-label" for="passwordInput">Password</label>
     </div>
@@ -60,10 +72,12 @@
     <div class="form-outline mb-4">
       <input
         type="password"
-        id="confirmPassword"
+        id="confirmPasswordInput"
+        name="confirmPasswordInput"
         class="form-control"
+        [(ngModel)]="registerDto.confirmPassword"
       />
-      <label class="form-label" for="confirmPassword"
+      <label class="form-label" for="confirmPasswordInput"
         >Confirm password</label
       >
     </div>
@@ -72,6 +86,7 @@
       <button
         type="button"
         class="btn btn-primary btn-block mb-4"
+        (click)="submit()"
       >
         Register
       </button>
