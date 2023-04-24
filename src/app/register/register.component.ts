@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { RegisterDto } from 'src/dtos/register.dto';
 import { RegisterDtoValidationService } from '../services/register-dto-validation.service';
 import { ValidationResult } from 'src/models/validation.result';
+import { RegisterService } from '../services/register.service';
+import { tick } from '@angular/core/testing';
 
 @Component({
   selector: 'app-register',
@@ -19,12 +21,13 @@ export class RegisterComponent implements OnInit {
   confirmPasswordErrors: string | null = null;
   tutorDescriptionErrors: string | null = null;
 
-  constructor(private readonly _validator: RegisterDtoValidationService) { }
+  constructor(private readonly _validator: RegisterDtoValidationService,
+    private readonly _registerService: RegisterService) { }
 
   ngOnInit(): void {
   }
 
-  public submit(): void{
+  public async submit(): Promise<void>{
     this.clearValidationErrors();
 
     if (this.registerDto.password === '' && this.registerDto.confirmPassword == null){
@@ -42,10 +45,12 @@ export class RegisterComponent implements OnInit {
     const validationResult = this._validator.validate(this.registerDto);
     if (!validationResult.isValid){
       this.registerDto.tutorDescription = descToRestore;
-      console.log(validationResult);
       this.handleValidationErrors(validationResult);
       return;
     }
+
+    const response = await this._registerService.register(this.registerDto);
+    console.log(response);
   }
   
   private clearValidationErrors(): void{
