@@ -3,7 +3,7 @@ import { RegisterDto } from 'src/dtos/register.dto';
 import { RegisterDtoValidationService } from '../services/register-dto-validation.service';
 import { ValidationResult } from 'src/models/validation.result';
 import { RegisterService } from '../services/register.service';
-import { tick } from '@angular/core/testing';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -22,7 +22,8 @@ export class RegisterComponent implements OnInit {
   tutorDescriptionErrors: string | null = null;
 
   constructor(private readonly _validator: RegisterDtoValidationService,
-    private readonly _registerService: RegisterService) { }
+    private readonly _registerService: RegisterService,
+    private readonly _router: Router) { }
 
   ngOnInit(): void {
   }
@@ -50,7 +51,9 @@ export class RegisterComponent implements OnInit {
     }
 
     const response = await this._registerService.register(this.registerDto);
-    console.log(response);
+    if (response.success){
+      this._router.navigate(["/advertisements"]);
+    }
   }
   
   private clearValidationErrors(): void{

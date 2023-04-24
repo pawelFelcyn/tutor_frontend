@@ -5,16 +5,16 @@ import { APIService } from './api.service';
 import { APIResponse } from 'src/models/api.response';
 import { LoginResponseDto } from 'src/dtos/login.response.dto';
 import { AppCookieService } from './app-cookie.service';
+import { LoggedUserContextService } from './logged-user-context.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService extends APIService{
 
-  statusChangedEventEmmiter: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(httpClient: HttpClient,
-    private readonly cookieServise: AppCookieService)
+    private readonly _loggedUserContextService: LoggedUserContextService)
   { 
     super(httpClient);
   }
@@ -23,15 +23,9 @@ export class LoginService extends APIService{
     const response = await this.post<LoginResponseDto>("api/authentication/login", dto);
 
     if (response.success){
-      this.cookieServise.set("token", (response.contentDeserialized as LoginResponseDto).token)
-      this.statusChangedEventEmmiter.emit(true);
+      this._loggedUserContextService.setNewData(response.contentDeserialized as LoginResponseDto);
     }
 
     return response;
-  }
-
-  public signOut(): void{
-    this.cookieServise.remove("token");
-    this.statusChangedEventEmmiter.emit(false);
   }
 }
