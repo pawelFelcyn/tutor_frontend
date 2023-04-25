@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { LoginDto } from 'src/dtos/login.dto';
 import { AppCookieService } from '../services/app-cookie.service';
 import { LoginService } from '../services/login.service';
+import { LoggedUserContextService } from '../services/logged-user-context.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -15,13 +16,13 @@ export class NavBarComponent implements OnInit {
 
   constructor(private readonly router: Router,
     private readonly _cookieService: AppCookieService,
-    private readonly _loginService: LoginService) { 
+    private readonly _loggedUserContextService: LoggedUserContextService) { 
       this.listenLoginStatusChanges();
     }
 
   private listenLoginStatusChanges(): void{
-    this._loginService.statusChangedEventEmmiter.subscribe(status =>{
-      this.isUserSignedIn = status;
+    this._loggedUserContextService.statusChangedEventEmmiter.subscribe(status =>{
+      this.isUserSignedIn = status != null;
     });
   }
 
@@ -35,6 +36,14 @@ export class NavBarComponent implements OnInit {
   }
 
   public signOut(): void{
-    this._loginService.signOut();
+    this._loggedUserContextService.deleteData();
+  }
+
+  public getSignedInUserFullName(): string | null{
+    if (this._loggedUserContextService.loggedUserDetails === null){
+      return null;
+    }
+
+    return `${this._loggedUserContextService.loggedUserDetails.firstName} ${this._loggedUserContextService.loggedUserDetails.lastName}`
   }
 }

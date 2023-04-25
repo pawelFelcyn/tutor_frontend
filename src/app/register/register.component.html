@@ -1,0 +1,127 @@
+<div class="registration-form-container">
+  <h2 class="text-uppercase text-center mb-5">Create an account</h2>
+
+  <form>
+    <div class="form-outline mb-4">
+      <input
+        type="text"
+        id="firstNameInput"
+        name="firstNameInput"
+        class="form-control"
+        [(ngModel)]="registerDto.firstName"
+        maxlength="50"
+      />
+      <div *ngIf="firstNameErrors != null" class="errors-div">
+        {{ firstNameErrors }}
+      </div>
+      <label class="form-label" for="firstNameInput">First name</label>
+    </div>
+
+    <div class="form-outline mb-4">
+        <input
+          type="text"
+          id="lastNameInput"
+          name="lastNameInput"
+          class="form-control"
+          [(ngModel)]="registerDto.lastName"
+          maxlength="50"
+        />
+        <div *ngIf="lastNameErrors != null" class="errors-div">
+          {{ lastNameErrors }}
+        </div>
+        <label class="form-label" for="lastNameInput">Last name</label>
+      </div>
+
+    <div class="form-outline mb-4">
+      <input
+        type="email"
+        id="emailInput"
+        name="emailInput"
+        class="form-control"
+        [(ngModel)]="registerDto.email"
+        maxlength="50"
+      />
+      <div *ngIf="emailErrors != null" class="errors-div">
+        {{ emailErrors }}
+      </div>
+      <label class="form-label" for="emailInput">Email</label>
+    </div>
+
+    <div class="form-outline mb-4">
+        <select
+          type="checkbox"
+          id="roleInput"
+          name="roleInput"
+          class="form-control select"
+          [(ngModel)]="registerDto.role">
+          <option value="User">User</option>
+          <option value="Tutor">Tutor</option>
+        </select>
+        <div *ngIf="roleErrors != null" class="errors-div">
+          {{ roleErrors }}
+        </div>
+        <label class="form-label" for="roleInput">Role</label>
+      </div>
+
+      <div class="form-outline mb-4" *ngIf="registerDto.role === 'Tutor'">
+        <textarea
+          rows="10"
+          id="descriptionInput"
+          name="descriptionInput"
+          class="form-control"
+          [(ngModel)]="registerDto.tutorDescription"
+          maxlength="500"></textarea>
+          <div *ngIf="tutorDescriptionErrors != null" class="errors-div">
+            {{ tutorDescriptionErrors }}
+          </div>
+        <label class="form-label" for="descriptionInput">Tutor description</label>
+      </div>
+
+    <div class="form-outline mb-4">
+      <input
+        type="password"
+        id="passwordInput"
+        name="passwordInput"
+        class="form-control"
+        [(ngModel)]="registerDto.password"
+        maxlength="50"
+      />
+      <div *ngIf="passwordErrors != null" class="errors-div">
+        {{ passwordErrors }}
+      </div>
+      <label class="form-label" for="passwordInput">Password</label>
+    </div>
+
+    <div class="form-outline mb-4">
+      <input
+        type="password"
+        id="confirmPasswordInput"
+        name="confirmPasswordInput"
+        class="form-control"
+        [(ngModel)]="registerDto.confirmPassword"
+        maxlength="50"
+      />
+      <div *ngIf="confirmPasswordErrors != null" class="errors-div">
+        {{ confirmPasswordErrors }}
+      </div>
+      <label class="form-label" for="confirmPasswordInput"
+        >Confirm password</label
+      >
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <button
+        type="button"
+        class="btn btn-primary btn-block mb-4"
+        (click)="submit()"
+      >
+        Register
+      </button>
+    </div>
+
+    <p class="text-center">
+      Have already an account?
+      <a routerLink="/signin" ><u>Login here</u></a>
+    </p>
+  </form>
+</div>

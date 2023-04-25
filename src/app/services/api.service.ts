@@ -11,8 +11,7 @@ export class APIService{
             const responseBody = await firstValueFrom(observable);
             return new APIResponse<T>(true, responseBody);
         } catch (e: any){
-            console.log(e);
-            return APIResponse.failure();
+            return APIResponse.failure(e.error.status as number, e.error);
         }
     }
 }
