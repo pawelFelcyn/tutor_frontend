@@ -53,6 +53,11 @@ export class RegisterComponent implements OnInit {
     const response = await this._registerService.register(this.registerDto);
     if (response.success){
       this._router.navigate(["/advertisements"]);
+      return;
+    }
+
+    if (response.statusCode == 400){
+      this.handleBadRequest(response.error);
     }
   }
   
@@ -74,5 +79,23 @@ export class RegisterComponent implements OnInit {
     this.passwordErrors = validationResult.errors['password'];
     this.confirmPasswordErrors = validationResult.errors['confirmPassword'];
     this.tutorDescriptionErrors = validationResult.errors['tutorDescription'];
+  }
+
+  private handleBadRequest(error: any): void{
+    const allErrors = error.errors;
+    this.extractErrors(allErrors, 'FirstName', v => this.firstNameErrors = v)
+    this.extractErrors(allErrors, 'LastName', v => this.lastNameErrors = v)
+    this.extractErrors(allErrors, 'Role', v => this.roleErrors = v)
+    this.extractErrors(allErrors, 'Email', v => this.emailErrors = v)
+    this.extractErrors(allErrors, 'Password', v => this.passwordErrors = v)
+    this.extractErrors(allErrors, 'ConfirmPassword', v => this.confirmPasswordErrors = v)
+    this.extractErrors(allErrors, 'TutorDescription', v => this.tutorDescriptionErrors = v)
+  }
+
+  private extractErrors(allErrors: any, propertyName: string, callback: (errors: string) => void){
+    const errors = allErrors[propertyName];
+    if (errors !== undefined){
+      callback(errors);
+    }
   }
 }
