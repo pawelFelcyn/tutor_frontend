@@ -38,4 +38,12 @@ export class NavBarComponent implements OnInit {
   public signOut(): void{
     this._loggedUserContextService.deleteData();
   }
+
+  public getSignedInUserFullName(): string | null{
+    if (this._loggedUserContextService.loggedUserDetails === null){
+      return null;
+    }
+
+    return `${this._loggedUserContextService.loggedUserDetails.firstName} ${this._loggedUserContextService.loggedUserDetails.lastName}`
+  }
 }

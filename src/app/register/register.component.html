@@ -9,6 +9,7 @@
         name="firstNameInput"
         class="form-control"
         [(ngModel)]="registerDto.firstName"
+        maxlength="50"
       />
       <div *ngIf="firstNameErrors != null" class="errors-div">
         {{ firstNameErrors }}
@@ -23,6 +24,7 @@
           name="lastNameInput"
           class="form-control"
           [(ngModel)]="registerDto.lastName"
+          maxlength="50"
         />
         <div *ngIf="lastNameErrors != null" class="errors-div">
           {{ lastNameErrors }}
@@ -37,6 +39,7 @@
         name="emailInput"
         class="form-control"
         [(ngModel)]="registerDto.email"
+        maxlength="50"
       />
       <div *ngIf="emailErrors != null" class="errors-div">
         {{ emailErrors }}
@@ -66,7 +69,8 @@
           id="descriptionInput"
           name="descriptionInput"
           class="form-control"
-          [(ngModel)]="registerDto.tutorDescription"></textarea>
+          [(ngModel)]="registerDto.tutorDescription"
+          maxlength="500"></textarea>
           <div *ngIf="tutorDescriptionErrors != null" class="errors-div">
             {{ tutorDescriptionErrors }}
           </div>
@@ -80,6 +84,7 @@
         name="passwordInput"
         class="form-control"
         [(ngModel)]="registerDto.password"
+        maxlength="50"
       />
       <div *ngIf="passwordErrors != null" class="errors-div">
         {{ passwordErrors }}
@@ -94,6 +99,7 @@
         name="confirmPasswordInput"
         class="form-control"
         [(ngModel)]="registerDto.confirmPassword"
+        maxlength="50"
       />
       <div *ngIf="confirmPasswordErrors != null" class="errors-div">
         {{ confirmPasswordErrors }}
