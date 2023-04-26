@@ -1,16 +1,22 @@
-<div class="filters">
-</div>
+<div class="filters"></div>
+<button
+  (click)="loadAdvertisements()"
+  type="button"
+  class="btn btn-primary btn-block mb-4"
+>
+  Load advertisements
+</button>
 <div class="ads">
-    <ul>
-        <li *ngFor="let ad of advertisements">
-            <div class="ad-container">
-                <div class="title">
-                    {{ad.title}}
-                </div>
-                <div class="price">
-                    {{ad.pricePerHour}}
-                </div>
-            </div>
-        </li>
-    </ul>
+  <ul>
+    <li *ngFor="let ad of advertisements">
+      <div class="ad-container">
+        <div class="title">
+          {{ ad.title }}
+        </div>
+        <div class="price">
+          {{ ad.pricePerHour }}
+        </div>
+      </div>
+    </li>
+  </ul>
 </div>

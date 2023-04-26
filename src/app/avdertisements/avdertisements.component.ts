@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AdvertisementDto } from 'src/dtos/advertisement.dto';
+import { AdvertisementsService } from '../services/advertisements.service';
 
 @Component({
   selector: 'app-avdertisements',
@@ -10,84 +11,23 @@ export class AvdertisementsComponent implements OnInit {
 
   advertisements: AdvertisementDto[] = [];
 
-  constructor() {
-    this.seedAdvertisements();
-  }
-
-  private seedAdvertisements(): void{
-    this.advertisements.push({
-      id: "1",
-      title: 'first title',
-      creationDate: new Date(),
-      lastModificationDate: new Date(),
-      pricePerHour: 10
-    });
-    this.advertisements.push({
-      id: "2",
-      title: 'second title',
-      creationDate: new Date(),
-      lastModificationDate: new Date(),
-      pricePerHour: 10
-    });
-    this.advertisements.push({
-      id: "3",
-      title: 'third title',
-      creationDate: new Date(),
-      lastModificationDate: new Date(),
-      pricePerHour: 10
-    });
-    this.advertisements.push({
-      id: "4",
-      title: 'fourth title',
-      creationDate: new Date(),
-      lastModificationDate: new Date(),
-      pricePerHour: 10
-    });
-    this.advertisements.push({
-      id: "5",
-      title: 'fifth title',
-      creationDate: new Date(),
-      lastModificationDate: new Date(),
-      pricePerHour: 10
-    });
-    this.advertisements.push({
-      id: "1",
-      title: 'first title',
-      creationDate: new Date(),
-      lastModificationDate: new Date(),
-      pricePerHour: 10
-    });
-    this.advertisements.push({
-      id: "2",
-      title: 'second title',
-      creationDate: new Date(),
-      lastModificationDate: new Date(),
-      pricePerHour: 10
-    });
-    this.advertisements.push({
-      id: "3",
-      title: 'third title',
-      creationDate: new Date(),
-      lastModificationDate: new Date(),
-      pricePerHour: 10
-    });
-    this.advertisements.push({
-      id: "4",
-      title: 'fourth title',
-      creationDate: new Date(),
-      lastModificationDate: new Date(),
-      pricePerHour: 10
-    });
-    this.advertisements.push({
-      id: "5",
-      title: 'fifth title',
-      creationDate: new Date(),
-      lastModificationDate: new Date(),
-      pricePerHour: 10
-    });
+  constructor(private readonly _advertisementsService: AdvertisementsService) {
   }
 
   ngOnInit(): void {
   }
 
+  public async loadAdvertisements(): Promise<void>{
+    this.advertisements.length = 0;
+    var result = await this._advertisementsService.getAll();
+    
+    if (!result.success){
+      //here we handle errors
+      return;
+    }
+
+    result.contentDeserialized?.items.forEach(i =>{
+      this.advertisements.push(i);
+    });
+  } 
 }
