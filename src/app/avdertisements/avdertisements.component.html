@@ -6,9 +6,12 @@
 >
   Load advertisements
 </button>
+<div class="page=info">
+    
+</div>
 <div class="ads">
   <ul>
-    <li *ngFor="let ad of advertisements">
+    <li *ngFor="let ad of page?.items">
       <div class="ad-container">
         <div class="title">
           {{ ad.title }}

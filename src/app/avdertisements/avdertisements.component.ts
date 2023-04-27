@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AdvertisementDto } from 'src/dtos/advertisement.dto';
 import { AdvertisementsService } from '../services/advertisements.service';
+import { PagedResult } from 'src/dtos/paged.result';
 
 @Component({
   selector: 'app-avdertisements',
@@ -9,7 +10,7 @@ import { AdvertisementsService } from '../services/advertisements.service';
 })
 export class AvdertisementsComponent implements OnInit {
 
-  advertisements: AdvertisementDto[] = [];
+  page: PagedResult<AdvertisementDto> | null = null;
 
   constructor(private readonly _advertisementsService: AdvertisementsService) {
   }
@@ -18,7 +19,7 @@ export class AvdertisementsComponent implements OnInit {
   }
 
   public async loadAdvertisements(): Promise<void>{
-    this.advertisements.length = 0;
+    this.page = null;
     var result = await this._advertisementsService.getAll();
     
     if (!result.success){
@@ -26,8 +27,6 @@ export class AvdertisementsComponent implements OnInit {
       return;
     }
 
-    result.contentDeserialized?.items.forEach(i =>{
-      this.advertisements.push(i);
-    });
+    this.page = result.contentDeserialized as PagedResult<AdvertisementDto>;
   } 
 }
