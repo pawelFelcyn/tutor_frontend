@@ -9,7 +9,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AvdertisementsComponent } from './avdertisements/avdertisements.component';
-import { RegisterComponent } from './register/register.component'
+import { RegisterComponent } from './register/register.component';
+import { AdvertisementFilteringComponent } from './advertisement-filtering/advertisement-filtering.component'
 
 const appRoutes: Routes = [
   { path: 'signin', component: LoginComponent },
@@ -18,7 +19,7 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
-  declarations: [AppComponent, NavBarComponent, LoginComponent, AvdertisementsComponent, RegisterComponent],
+  declarations: [AppComponent, NavBarComponent, LoginComponent, AvdertisementsComponent, RegisterComponent, AdvertisementFilteringComponent],
   imports: [
     BrowserModule, 
     AppRoutingModule, 
