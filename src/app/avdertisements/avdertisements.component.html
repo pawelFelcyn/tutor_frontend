@@ -1,11 +1,4 @@
-<app-advertisement-filtering></app-advertisement-filtering>
-<button
-  (click)="loadAdvertisements()"
-  type="button"
-  class="btn btn-primary btn-block mb-4"
->
-  Load advertisements
-</button>
+<app-advertisement-filtering (loadEventEmitter)="loadAdvertisements($event)"></app-advertisement-filtering>
 <div class="page=info">
     
 </div>

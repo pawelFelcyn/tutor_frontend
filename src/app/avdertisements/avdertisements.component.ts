@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AdvertisementDto } from 'src/dtos/advertisement.dto';
 import { AdvertisementsService } from '../services/advertisements.service';
 import { PagedResult } from 'src/dtos/paged.result';
+import { AdvertisementFilterDto } from 'src/dtos/filter.dto';
 
 @Component({
   selector: 'app-avdertisements',
@@ -18,7 +19,7 @@ export class AvdertisementsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public async loadAdvertisements(): Promise<void>{
+  public async loadAdvertisements(filter: AdvertisementFilterDto): Promise<void>{
     this.page = null;
     var result = await this._advertisementsService.getAll();
     
