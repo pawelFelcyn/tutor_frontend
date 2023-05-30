@@ -15,9 +15,11 @@ export class APIService{
         }
     }
 
-    protected async get<T>(url: string): Promise<APIResponse<T>>{
+    protected async get<T>(url: string, params: any = null): Promise<APIResponse<T>>{
         try{
-            const observable = this._httpClient.get<T>(`http://localhost:5000/${url}`);
+            const observable = this._httpClient.get<T>(`http://localhost:5000/${url}`, {
+                params: params
+            });
             const responseBody = await firstValueFrom(observable);
             return new APIResponse<T>(true, responseBody);
         } catch (e: any){

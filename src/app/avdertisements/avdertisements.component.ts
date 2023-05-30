@@ -20,8 +20,9 @@ export class AvdertisementsComponent implements OnInit {
   }
 
   public async loadAdvertisements(filter: AdvertisementFilterDto): Promise<void>{
+    console.log(filter);
     this.page = null;
-    var result = await this._advertisementsService.getAll();
+    var result = await this._advertisementsService.getAll(filter);
     
     if (!result.success){
       //here we handle errors
