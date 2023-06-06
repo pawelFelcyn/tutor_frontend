@@ -1,0 +1,18 @@
+.advertisement-details {
+  /* Add additional styles as needed */
+}
+
+.text-orange {
+  color: orange;
+}
+
+.description {
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+.error{
+    color: red;
+    display: flex;
+    justify-content: center;
+}

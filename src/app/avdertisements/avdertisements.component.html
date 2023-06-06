@@ -10,7 +10,7 @@
 <div class="ads">
   <ul>
     <li *ngFor="let ad of page?.items">
-      <div class="ad-container">
+      <div class="ad-container" (click)="loadDetails(ad.id)">
         <div class="title">
           {{ ad.title }}
         </div>

@@ -1,0 +1,27 @@
+<div *ngIf="loadingDetailsErrorOccured" class="error">
+ <h1>
+    Could not load advertisemet.
+ </h1>
+</div>
+<div *ngIf="details" class="advertisement-details">
+  <h2 class="text-orange">{{ details.title }}</h2>
+
+  <ul class="list-unstyled">
+    <li><strong>Creation Date:</strong> {{ details.creationDate | date }}</li>
+    <li>
+      <strong>Last Modification Date:</strong>
+      {{ details.lastModificationDate | date }}
+    </li>
+    <li>
+      <strong>Education Levels:</strong>
+      {{ getEducationLevelsString(details.levels) }}
+    </li>
+    <li><strong>Subject:</strong> {{ details.subject }}</li>
+    <li><strong>Price per Hour:</strong> {{ details.pricePerHour }}</li>
+    <li><strong>Created By:</strong> {{ details.createdById }}</li>
+  </ul>
+
+  <p class="description">
+    {{ details.description || "No description available" }}
+  </p>
+</div>
