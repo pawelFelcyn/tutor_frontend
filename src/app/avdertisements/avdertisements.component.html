@@ -2,6 +2,11 @@
 <div class="page=info">
     
 </div>
+<div *ngIf="loadingAdvertisementsErrorOccured" class="error-container">
+  <h1>
+    There was a problem with loading advertisements.
+  </h1>
+</div>
 <div class="ads">
   <ul>
     <li *ngFor="let ad of page?.items">

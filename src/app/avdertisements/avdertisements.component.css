@@ -34,3 +34,9 @@ ul{
     grid-column: 2;
     grid-row: 1 / span2;
 }
+
+.error-container{
+    color: red;
+    display: flex;
+    justify-content: center;
+}

@@ -12,6 +12,7 @@ import { AdvertisementFilterDto } from 'src/dtos/filter.dto';
 export class AvdertisementsComponent implements OnInit {
 
   page: PagedResult<AdvertisementDto> | null = null;
+  loadingAdvertisementsErrorOccured: boolean = false;
 
   constructor(private readonly _advertisementsService: AdvertisementsService) {
   }
@@ -25,10 +26,13 @@ export class AvdertisementsComponent implements OnInit {
     var result = await this._advertisementsService.getAll(filter);
     
     if (!result.success){
-      //here we handle errors
+      this.loadingAdvertisementsErrorOccured = true;
       return;
     }
 
+    this.loadingAdvertisementsErrorOccured = false;
     this.page = result.contentDeserialized as PagedResult<AdvertisementDto>;
   } 
+
+
 }
