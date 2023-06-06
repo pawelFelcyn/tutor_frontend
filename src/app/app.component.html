@@ -1,4 +1,4 @@
-<app-nav-bar></app-nav-bar>
+<app-nav-bar *ngIf="currentRoute != '/register' && currentRoute != '/signin'"></app-nav-bar>
 <div id="container">
     <router-outlet></router-outlet>
 </div>

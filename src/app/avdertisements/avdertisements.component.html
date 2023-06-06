@@ -1,1 +1,23 @@
-<p>avdertisements works!</p>
+<app-advertisement-filtering (loadEventEmitter)="loadAdvertisements($event)"></app-advertisement-filtering>
+<div class="page=info">
+    
+</div>
+<div *ngIf="loadingAdvertisementsErrorOccured" class="error-container">
+  <h1>
+    There was a problem with loading advertisements.
+  </h1>
+</div>
+<div class="ads">
+  <ul>
+    <li *ngFor="let ad of page?.items">
+      <div class="ad-container" (click)="loadDetails(ad.id)">
+        <div class="title">
+          {{ ad.title }}
+        </div>
+        <div class="price">
+          {{ ad.pricePerHour }}
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>

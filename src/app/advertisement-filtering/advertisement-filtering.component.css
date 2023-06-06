@@ -1,0 +1,15 @@
+.filters-container{
+    border-radius: 20px;
+    background-color: rgb(223, 245, 252);
+    padding: 30px;
+}
+
+.filters-container > *:not(label){
+    margin-top: 10px;
+}
+
+.price-container{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 100px;
+}

@@ -1,0 +1,79 @@
+<div class="filters-container">
+  <input
+    [(ngModel)]="filter.title"
+    type="email"
+    id="titleInput"
+    name="titleInput"
+    class="form-control"
+  />
+  <label class="form-label" for="titleInput">Title</label>
+
+  <select
+    type="checkbox"
+    id="subjectInput"
+    name="subjectInput"
+    class="form-control select"
+    [(ngModel)]="selectedSubjectName"
+  >
+    <option *ngFor="let s of subjects" [value]="s.name">{{ s.name }}</option>
+  </select>
+  <label class="form-label" for="subjectInput">Subject</label>
+
+  <div class="price-container">
+    <div>
+      <input
+        [(ngModel)]="filter.minPrice"
+        min="1"
+        step="1"
+        type="number"
+        id="minPriceInput"
+        name="minPriceInput"
+        class="form-control"
+      />
+      <label class="form-label" for="minPriceInput">Min price</label>
+    </div>
+
+    <div>
+      <input
+        [(ngModel)]="filter.maxPrice"
+        min="1"
+        step="1"
+        type="number"
+        id="maxPriceInput"
+        name="maxPriceInput"
+        class="form-control"
+      />
+      <label class="form-label" for="maxPriceInput">Max price</label>
+    </div>
+  </div>
+
+  <select
+    type="checkbox"
+    id="pageSizeInput"
+    name="pageSizeInput"
+    class="form-control select"
+    [(ngModel)]="filter.pageSize"
+  >
+    <option *ngFor="let ps of pageSizes" [value]="ps">{{ ps }}</option>
+  </select>
+  <label class="form-label" for="pageSizeInput">Page size</label>
+
+  <input
+    [(ngModel)]="filter.pageNumber"
+    min="1"
+    step="1"
+    type="number"
+    id="pageNumberInput"
+    name="pageNumberInput"
+    class="form-control"
+  />
+  <label class="form-label" for="pageNumberInput">Page number</label>
+
+  <button
+    (click)="loadAdvertisements()"
+    type="button"
+    class="btn btn-primary btn-block mb-4"
+  >
+    Load advertisements
+  </button>
+</div>
