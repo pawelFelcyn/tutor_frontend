@@ -16,7 +16,7 @@ export class NavBarComponent implements OnInit {
 
   constructor(private readonly router: Router,
     private readonly _cookieService: AppCookieService,
-    private readonly _loggedUserContextService: LoggedUserContextService) { 
+    public readonly _loggedUserContextService: LoggedUserContextService) { 
       this.listenLoginStatusChanges();
     }
 

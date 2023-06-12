@@ -61,4 +61,12 @@ export class LoggedUserContextService {
     this.token = null;
     this.loggedUserDetails = null;
    }
+
+   public canCreateAdvertisement(): boolean{
+    if (this.loggedUserDetails == null){
+      return false;
+    }
+
+    return this.loggedUserDetails.role == 'Tutor';
+   }
 }

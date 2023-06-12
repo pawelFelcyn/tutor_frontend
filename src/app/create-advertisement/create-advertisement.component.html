@@ -1,0 +1,6 @@
+<ng-container *ngIf="loggedUserContextService.canCreateAdvertisement(); else notAllowedBlock">create-advertisement works!</ng-container>
+<ng-template #notAllowedBlock>
+    <p>
+        You are not allowed to create advertisement!
+    </p>
+</ng-template>
