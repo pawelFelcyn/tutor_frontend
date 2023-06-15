@@ -14,16 +14,16 @@ export class LoginService extends APIService{
 
 
   constructor(httpClient: HttpClient,
-    private readonly _loggedUserContextService: LoggedUserContextService)
+    _loggedUserContextService: LoggedUserContextService)
   { 
-    super(httpClient);
+    super(httpClient, _loggedUserContextService);
   }
 
   public async login(dto: LoginDto): Promise<APIResponse<LoginResponseDto>>{
     const response = await this.post<LoginResponseDto>("api/authentication/login", dto);
 
     if (response.success){
-      this._loggedUserContextService.setNewData(response.contentDeserialized as LoginResponseDto);
+      this._loggedUserContextService?.setNewData(response.contentDeserialized as LoginResponseDto);
     }
 
     return response;

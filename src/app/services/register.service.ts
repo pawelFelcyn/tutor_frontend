@@ -12,15 +12,15 @@ import { LoggedUserContextService } from './logged-user-context.service';
 export class RegisterService extends APIService{
 
   constructor(client: HttpClient, 
-    private readonly _loggedUserContextService: LoggedUserContextService) {
-    super(client);
+    _loggedUserContextService: LoggedUserContextService) {
+    super(client, _loggedUserContextService);
    }
 
    public async register(dto: RegisterDto) : Promise<APIResponse<LoginResponseDto>>{
     const response = await this.post<LoginResponseDto>('api/authentication/register', dto);
 
     if (response.success && response.contentDeserialized != null){
-      this._loggedUserContextService.setNewData(response.contentDeserialized);
+      this._loggedUserContextService?.setNewData(response.contentDeserialized);
     }
 
     return response;

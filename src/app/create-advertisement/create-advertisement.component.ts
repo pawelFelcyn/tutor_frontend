@@ -6,6 +6,8 @@ import { CreateAdvertisementDtoValidationService } from '../services/create-adve
 import { SubjectsService } from '../services/subjects.service';
 import { SubjectDto } from 'src/dtos/subject.dto';
 import { ValidationResult } from 'src/models/validation.result';
+import { AdvertisementsService } from '../services/advertisements.service';
+import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-advertisement',
@@ -21,10 +23,20 @@ export class CreateAdvertisementComponent implements OnInit {
   subjectError: string | null = null;
   priceError: string | null = null;
 
+  public get selectedSubject(): string{
+    return this.advertisement.subjectId;
+  }
+
+  public set selectedSubject(id: string){
+    this.advertisement.subjectId = id;
+  }
+
 
   constructor(public readonly loggedUserContextService: LoggedUserContextService,
     private readonly _validator: CreateAdvertisementDtoValidationService,
-    private readonly _subjectsService: SubjectsService) { 
+    private readonly _subjectsService: SubjectsService,
+    private readonly _advertisementsService: AdvertisementsService,
+    private readonly _router: Router) { 
     const levels = Object.entries(EducationLevels);
     this.allEducationLevels = levels.slice(Math.ceil(levels.length / 2));
   }
@@ -42,7 +54,8 @@ export class CreateAdvertisementComponent implements OnInit {
     });
   }
 
-  public submitForm(): void{
+  public async submitForm(): Promise<void>{
+    console.log(this.advertisement);
     this.clearErrors();
     const validationResult = this._validator.validate(this.advertisement);
 
@@ -50,6 +63,20 @@ export class CreateAdvertisementComponent implements OnInit {
       this.handleValidationErrors(validationResult);
       return;
     }
+
+    var apiResponse = await this._advertisementsService.create(this.advertisement);
+
+    if (!apiResponse.success){
+      alert("Couldn't create advertisement");
+    }
+
+    const queryParams  = {
+      id: apiResponse.contentDeserialized?.id
+    }
+    const navigationExtras: NavigationExtras = {
+      queryParams
+    };
+    this._router.navigate([`/advertisements/details`], navigationExtras);
   }
 
   private clearErrors(): void{
@@ -64,10 +91,6 @@ export class CreateAdvertisementComponent implements OnInit {
     this.descriptionError = result.errors['description'];
     this.subjectError = result.errors['subjectId'];
     this.priceError = result.errors['pricePerHour'];
-  }
-
-  isAtLeastOneLevelSelected(): boolean {
-    return Object.values(this.advertisement.levels).some(level => level);
   }
 
 }

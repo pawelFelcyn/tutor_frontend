@@ -16,7 +16,7 @@ export class CreateAdvertisementDtoValidationService extends Validator{
     const errors: {[key: string]: string} = {};
     this.appendError(this.validateTitle(dto.title), "title", errors);
     this.appendError(this.validateDescription(dto.description), "description", errors);
-    this.appendError(this.validateSubjectId(dto.title), "subjectId", errors);
+    this.appendError(this.validateSubjectId(dto.subjectId), "subjectId", errors);
     this.appendError(this.validatePrice(dto.pricePerHour), "pricePerHour", errors);
     return new ValidationResult(errors);
   }
@@ -42,7 +42,7 @@ export class CreateAdvertisementDtoValidationService extends Validator{
   }
 
   private validateSubjectId(subjectId: string | null){
-    const regex = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/;
+    const regex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
     if (!subjectId || !regex.test(subjectId)){
       return "Subject must not be empty";
     }
